@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Dojos & Ninjas</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{url_for('static',filename = '../static/style.css')}}">
+    </head>
+    <body>
+        <div class="l_block">
+            <div class ="block">
+                <h1>Add a Dojos</h1>
+                <form action="/dojo_process" method="POST">
+                    <p><span class="title">Name</span><input type="text" name="dojo_name"></p>
+                    <p><span class="title">City</span><input type="text" name="dojo_city"></p>
+                    <p><span class="title">State</span><input type="text" name="dojo_state"></p>
+                    <input type="submit" value="Add">
+                </form>
+            </div>
+        
+            <div class ="block">
+                <h1>Add a Ninja</h1>
+                <form action="ninja_process" method="POST">
+                    <p><span class="title">First Name</span><input type="text" name="first_name"></p>
+                    <p><span class="title">Last Name</span><input type="text" name="last_name"></p>
+                    <p>
+                        <span class="title">Dojo</span>
+                        <select name="dojo_option">
+                            <option value="" disabled selected>-select a dojo-</option>
+                            {% for each_dojo in list_of_dojos %}
+                                <option value={{each_dojo.id}}>{{each_dojo.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    <input type="submit" value="Add">
+                </form>
+            </div>
+        </div>
+        
+
+        <hr>
+
+        <h1>All the Dojos</h1>
+        <div class ="block_result">
+            {% for each_dojo in list_of_dojos %}
+                <h4>Ninjas at the {{each_dojo.name}}</h4>
+                {% for each_student in each_dojo.dojo_ninjas %}
+                    <li>{{each_student.first_name}} {{each_student.last_name}}</li>
+                {% endfor %}
+            {% endfor %}
+        </div>
+            
+        <!-- <script src="" async defer></script> -->
+    </body>
+</html>

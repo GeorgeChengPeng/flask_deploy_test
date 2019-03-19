@@ -1,0 +1,4 @@
+*.pyc
+*.db
+py3SQLAlchemyEnv
+__pycache__
